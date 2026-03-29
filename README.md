@@ -1,5 +1,10 @@
 # Is My Website SEO Poisoned?
 
+
+<img width="1870" height="946" alt="image" src="https://github.com/user-attachments/assets/35f79e58-d143-4ebf-8187-8ef3a63d5660" />
+
+
+
 A small Node.js tool that compares how a URL responds to:
 
 - a normal direct visit
