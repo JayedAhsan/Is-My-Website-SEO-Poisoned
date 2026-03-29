@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is My Website SEO Poisoned? | SEO Poison Checker</title>
+  <meta
+    name="description"
+    content="Check if your website may be SEO poisoned by comparing direct visits, Google search clicks, and Googlebot responses."
+  >
+  <meta
+    name="keywords"
+    content="is my website seo poisoned, seo poison checker, cloaking checker, googlebot checker, seo poisoning test"
+  >
+  <meta property="og:title" content="Is My Website SEO Poisoned?">
+  <meta
+    property="og:description"
+    content="Compare direct visits, Google search clicks, and Googlebot responses to spot cloaking or SEO poisoning."
+  >
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Is My Website SEO Poisoned?">
+  <meta
+    name="twitter:description"
+    content="Check if your website may be SEO poisoned with a simple three-view comparison tool."
+  >
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="page">
+  <main class="layout">
+    <header class="site-header">
+      <div class="site-title">Is My Website SEO Poisoned?</div>
+    </header>
+
+    <section id="about" class="hero">
+      <div class="hero-copy">
+        <h1 class="hero-title">Is My Website SEO Poisoned?</h1>
+        <p class="hero-subtitle">Compare direct visits, Google clicks, and Googlebot responses.</p>
+        <p class="hero-text">
+          A simple page to inspect how a URL behaves across three request types. If the returned page shifts between
+          those views, it can be a sign of cloaking, poisoned SEO landing pages, or suspicious redirect behavior.
+        </p>
+      </div>
+
+      <aside class="info-card">
+        <div class="eyebrow">What it checks</div>
+        <div class="info-list">
+          <div class="info-item">
+            <h2>Direct visit</h2>
+            <p>Requests the target like a normal visitor.</p>
+          </div>
+          <div class="info-item">
+            <h2>Google search click</h2>
+            <p>Adds a Google referrer to imitate search traffic.</p>
+          </div>
+          <div class="info-item">
+            <h2>Googlebot view</h2>
+            <p>Uses a Googlebot user agent for crawler-facing content.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="checker" class="section">
+      <div class="section-copy">
+        <h2 class="section-title">Run a check</h2>
+        <p class="section-text">Enter a URL and inspect what changes between the three request profiles.</p>
+      </div>
+
+      <div class="checker-card">
+        <label for="urlInput" class="field-label">Target URL</label>
+        <div class="checker-row">
+          <input
+            id="urlInput"
+            type="url"
+            placeholder="https://example.com/path"
+            value="https://tmis.bffwt.gov.bd/mis/book/12345678.html"
+            class="url-input"
+          >
+          <button id="checkButton" type="button" class="primary-button">Check URL</button>
+        </div>
+
+        <div id="status" class="status" aria-live="polite"></div>
+
+        <section id="summary" class="summary-card is-hidden" aria-live="polite">
+          <h2 id="summaryTitle" class="summary-title">Awaiting analysis</h2>
+          <p id="summaryText" class="summary-text">Run a check to compare the three responses.</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="results" class="section">
+      <div class="section-copy">
+        <h2 class="section-title">Results</h2>
+        <p class="section-text">
+          Each panel shows a rendered preview and the important head tags parsed from the response.
+        </p>
+      </div>
+
+      <div class="results-grid">
+        <article class="result-card">
+          <header class="result-header">
+            <div>
+              <div class="eyebrow">Profile 01</div>
+              <h3 class="result-title">Visited directly</h3>
+              <p class="result-description">Normal visitor request with no Google-specific hints.</p>
+            </div>
+            <span id="directBadge" class="badge">Idle</span>
+          </header>
+          <div class="result-body">
+            <div class="eyebrow">Rendered preview</div>
+            <iframe id="directFrame" class="result-frame" sandbox=""></iframe>
+            <div class="eyebrow">Parsed head tags</div>
+            <pre id="directOutput" class="result-output">No response yet.</pre>
+          </div>
+        </article>
+
+        <article class="result-card">
+          <header class="result-header">
+            <div>
+              <div class="eyebrow">Profile 02</div>
+              <h3 class="result-title">Clicked from Google</h3>
+              <p class="result-description">Adds a Google search referrer from the backend.</p>
+            </div>
+            <span id="searchBadge" class="badge">Idle</span>
+          </header>
+          <div class="result-body">
+            <div class="eyebrow">Rendered preview</div>
+            <iframe id="searchFrame" class="result-frame" sandbox=""></iframe>
+            <div class="eyebrow">Parsed head tags</div>
+            <pre id="searchOutput" class="result-output">No response yet.</pre>
+          </div>
+        </article>
+
+        <article class="result-card">
+          <header class="result-header">
+            <div>
+              <div class="eyebrow">Profile 03</div>
+              <h3 class="result-title">What Googlebot sees</h3>
+              <p class="result-description">Uses a Googlebot-style user agent from the backend.</p>
+            </div>
+            <span id="botBadge" class="badge">Idle</span>
+          </header>
+          <div class="result-body">
+            <div class="eyebrow">Rendered preview</div>
+            <iframe id="botFrame" class="result-frame" sandbox=""></iframe>
+            <div class="eyebrow">Parsed head tags</div>
+            <pre id="botOutput" class="result-output">No response yet.</pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      Developer:
+      <a href="https://jayed.me" target="_blank" rel="noreferrer" class="footer-link">Jayed Ahsan Saad</a>
+      (<a href="https://jayed.me" target="_blank" rel="noreferrer" class="footer-link footer-link--muted">https://jayed.me</a>)
+      | Licensed under the MIT License
+    </footer>
+
+    <script>
+      const urlInput = document.getElementById("urlInput");
+      const checkButton = document.getElementById("checkButton");
+      const statusEl = document.getElementById("status");
+      const summaryEl = document.getElementById("summary");
+      const summaryTitleEl = document.getElementById("summaryTitle");
+      const summaryTextEl = document.getElementById("summaryText");
+
+      const views = {
+        direct: {
+          badge: document.getElementById("directBadge"),
+          output: document.getElementById("directOutput"),
+          frame: document.getElementById("directFrame")
+        },
+        search: {
+          badge: document.getElementById("searchBadge"),
+          output: document.getElementById("searchOutput"),
+          frame: document.getElementById("searchFrame")
+        },
+        bot: {
+          badge: document.getElementById("botBadge"),
+          output: document.getElementById("botOutput"),
+          frame: document.getElementById("botFrame")
+        }
+      };
+
+      function normalizeText(text) {
+        return text
+          .replace(/\s+/g, " ")
+          .replace(/https?:\/\/\S+/gi, "[url]")
+          .trim();
+      }
+
+      function similarity(a, b) {
+        if (!a && !b) return 1;
+        if (!a || !b) return 0;
+
+        const setA = new Set(normalizeText(a).toLowerCase().split(" ").filter(Boolean));
+        const setB = new Set(normalizeText(b).toLowerCase().split(" ").filter(Boolean));
+        const union = new Set([...setA, ...setB]);
+        let overlap = 0;
+
+        for (const token of setA) {
+          if (setB.has(token)) overlap += 1;
+        }
+
+        return union.size ? overlap / union.size : 0;
+      }
+
+      function escapeHtml(text) {
+        return text
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function formatResult(result) {
+        if (!result.ok) {
+          return [
+            `Request status: ${result.statusText}`,
+            "",
+            result.error
+          ].join("\n");
+        }
+
+        return [
+          `Final URL: ${result.finalUrl}`,
+          `HTTP Status: ${result.status}`,
+          `Content Type: ${result.contentType || "Unknown"}`,
+          `TLS Mode: ${result.insecureTls ? "Insecure fallback" : "Verified"}`,
+          "",
+          result.displayBody || result.body
+        ].join("\n");
+      }
+
+      function getMetaContent(parsed, name) {
+        return parsed.querySelector(`meta[name="${name}"]`)?.getAttribute("content")?.trim() || "";
+      }
+
+      function getPropertyContent(parsed, property) {
+        return parsed.querySelector(`meta[property="${property}"]`)?.getAttribute("content")?.trim() || "";
+      }
+
+      function toDisplayBody(result) {
+        const contentType = (result.contentType || "").toLowerCase();
+        const body = result.body || "";
+
+        if (!contentType.includes("html")) {
+          return body;
+        }
+
+        try {
+          const parsed = new DOMParser().parseFromString(body, "text/html");
+          const lines = [
+            `title: ${parsed.querySelector("title")?.textContent?.trim() || "[missing]"}`,
+            `meta description: ${getMetaContent(parsed, "description") || "[missing]"}`,
+            `meta robots: ${getMetaContent(parsed, "robots") || "[missing]"}`,
+            `canonical: ${parsed.querySelector('link[rel="canonical"]')?.getAttribute("href")?.trim() || "[missing]"}`,
+            `og:title: ${getPropertyContent(parsed, "og:title") || "[missing]"}`,
+            `og:description: ${getPropertyContent(parsed, "og:description") || "[missing]"}`
+          ];
+
+          return lines.join("\n");
+        } catch {
+          return body;
+        }
+      }
+
+      function toPreviewHtml(result) {
+        const contentType = (result.contentType || "").toLowerCase();
+        if (!contentType.includes("html")) {
+          return `<pre>${escapeHtml(result.body || "")}</pre>`;
+        }
+
+        return result.body || "";
+      }
+
+      function setSummaryTone(tone) {
+        summaryEl.className = "summary-card";
+
+        if (tone === "poisoned") {
+          summaryEl.classList.add("summary-card--poisoned");
+          return;
+        }
+
+        if (tone === "clean") {
+          summaryEl.classList.add("summary-card--clean");
+          return;
+        }
+
+        summaryEl.classList.add("summary-card--neutral");
+      }
+
+      function setLoadingState() {
+        for (const view of Object.values(views)) {
+          view.badge.textContent = "Loading";
+          view.badge.className = "badge badge--loading";
+          view.output.textContent = "Fetching...";
+          view.frame.srcdoc = "<p style='font-family: Inter, Arial, sans-serif; padding: 16px;'>Fetching...</p>";
+        }
+      }
+
+      function renderResults(results) {
+        for (const [key, result] of Object.entries(results)) {
+          const view = views[key];
+          if (!view) continue;
+
+          if (result.ok) {
+            view.badge.textContent = `HTTP ${result.status}`;
+            view.badge.className = "badge badge--success";
+            result.displayBody = toDisplayBody(result);
+            view.frame.srcdoc = toPreviewHtml(result);
+          } else {
+            view.badge.textContent = "Failed";
+            view.badge.className = "badge badge--error";
+            view.frame.srcdoc = `<pre style="font-family: Consolas, monospace; padding: 16px; white-space: pre-wrap;">${escapeHtml(result.error || "Request failed")}</pre>`;
+          }
+
+          view.output.textContent = formatResult(result);
+        }
+      }
+
+      function analyze(results) {
+        const direct = results.direct.ok ? results.direct.body : "";
+        const search = results.search.ok ? results.search.body : "";
+        const bot = results.bot.ok ? results.bot.body : "";
+
+        const directVsSearch = similarity(direct, search);
+        const directVsBot = similarity(direct, bot);
+        const searchVsBot = similarity(search, bot);
+
+        const score = Math.min(directVsSearch, directVsBot, searchVsBot);
+        const anyFailure = Object.values(results).some((result) => !result.ok);
+
+        let title = "Possible cloaking or SEO poisoning detected";
+        let message = "The three responses differ significantly. That pattern can indicate cloaking, search-engine-only content, or redirect-based SEO poisoning.";
+        let tone = "poisoned";
+
+        if (anyFailure) {
+          title = "Analysis incomplete";
+          message = "At least one request failed, so the comparison is partial.";
+          tone = "";
+        } else if (score >= 0.85) {
+          title = "No strong SEO poisoning signal";
+          message = "The direct, Google-search-style, and Googlebot responses are highly similar.";
+          tone = "clean";
+        } else if (score >= 0.55) {
+          title = "Responses differ somewhat";
+          message = "There are meaningful differences between visitor and Googlebot-like responses.";
+          tone = "";
+        }
+
+        summaryTitleEl.textContent = title;
+        summaryTextEl.textContent = `${message} Similarity scores: direct/search ${directVsSearch.toFixed(2)}, direct/bot ${directVsBot.toFixed(2)}, search/bot ${searchVsBot.toFixed(2)}.`;
+        summaryEl.classList.remove("is-hidden");
+        setSummaryTone(tone);
+      }
+
+      async function runCheck() {
+        const rawUrl = urlInput.value.trim();
+
+        if (!rawUrl) {
+          statusEl.textContent = "Enter a URL first.";
+          urlInput.focus();
+          return;
+        }
+
+        let parsedUrl;
+        try {
+          parsedUrl = new URL(rawUrl);
+        } catch {
+          statusEl.textContent = "Enter a valid URL including http:// or https://";
+          urlInput.focus();
+          return;
+        }
+
+        checkButton.disabled = true;
+        statusEl.textContent = `Checking ${parsedUrl.href}`;
+        summaryEl.classList.add("is-hidden");
+
+        setLoadingState();
+
+        let results;
+        try {
+          const response = await fetch("/api/check", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ url: parsedUrl.href })
+          });
+
+          if (!response.ok) {
+            throw new Error(`Backend returned HTTP ${response.status}`);
+          }
+
+          results = await response.json();
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          results = {
+            direct: { ok: false, statusText: "Request failed", error: message },
+            search: { ok: false, statusText: "Request failed", error: message },
+            bot: { ok: false, statusText: "Request failed", error: message }
+          };
+        }
+
+        renderResults(results);
+        analyze(results);
+        statusEl.textContent = "Check complete.";
+        checkButton.disabled = false;
+      }
+
+      checkButton.addEventListener("click", runCheck);
+      urlInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") runCheck();
+      });
+    </script>
+  </main>
+</body>
+</html>

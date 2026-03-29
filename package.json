@@ -1,0 +1,14 @@
+{
+  "name": "seo-poison-checker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:css": "npm exec tailwindcss -- -i ./input.css -o ./styles.css --minify",
+    "build": "npm run build:css && node build.js",
+    "start": "npm run build:css && node server.js"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  }
+}
